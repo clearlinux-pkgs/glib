@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.72.2
-Release  : 151
+Release  : 152
 URL      : https://download.gnome.org/sources/glib/2.72/glib-2.72.2.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.72/glib-2.72.2.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -230,7 +230,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656032903
+export SOURCE_DATE_EPOCH=1656115008
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
