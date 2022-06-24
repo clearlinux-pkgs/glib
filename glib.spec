@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.72.2
-Release  : 150
+Release  : 151
 URL      : https://download.gnome.org/sources/glib/2.72/glib-2.72.2.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.72/glib-2.72.2.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -230,7 +230,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1654014906
+export SOURCE_DATE_EPOCH=1656032903
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -315,7 +315,7 @@ ln -s ../libexec/glib-compile-schemas %{buildroot}/usr/bin
 # fix busted multlib compiles by providing custom header to include the right architecture file
 install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibconfig.h
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -700,6 +700,21 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0.7200.2
+/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7200.2
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0.7200.2
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7200.2
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0.7200.2
 /usr/lib64/libgio-2.0.so.0
 /usr/lib64/libgio-2.0.so.0.7200.2
 /usr/lib64/libglib-2.0.so.0
@@ -710,7 +725,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/lib64/libgobject-2.0.so.0.7200.2
 /usr/lib64/libgthread-2.0.so.0
 /usr/lib64/libgthread-2.0.so.0.7200.2
-/usr/share/clear/optimized-elf/lib*
 
 %files lib32
 %defattr(-,root,root,-)
