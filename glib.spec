@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.72.3
-Release  : 156
+Release  : 157
 URL      : https://download.gnome.org/sources/glib/2.72/glib-2.72.3.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.72/glib-2.72.3.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -230,7 +230,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656692234
+export SOURCE_DATE_EPOCH=1661264380
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -274,8 +274,8 @@ meson test -C builddir --print-errorlogs || : || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/glib
-cp %{_builddir}/glib-2.72.3/COPYING %{buildroot}/usr/share/package-licenses/glib/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/glib-2.72.3/gmodule/COPYING %{buildroot}/usr/share/package-licenses/glib/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/glib-%{version}/COPYING %{buildroot}/usr/share/package-licenses/glib/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/glib-%{version}/gmodule/COPYING %{buildroot}/usr/share/package-licenses/glib/01a6b4bf79aca9b556822601186afab86e8c4fbf
 pushd ../build32/
 DESTDIR=%{buildroot} ninja -C builddir install
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -709,10 +709,12 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0.7200.3
 /usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7200.3
+/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7200.3-gdb.py
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0.7200.3
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7200.3
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7200.3-gdb.py
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0.7200.3
 /usr/lib64/libgio-2.0.so.0
