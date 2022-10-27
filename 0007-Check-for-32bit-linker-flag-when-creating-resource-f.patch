@@ -9,14 +9,14 @@ will cause build failures. Instead check to see if the -m32 linker
 flag has been passed and if it has, add an argument to ld to create
 the elf_i386 object.
 ---
- gio/tests/meson.build | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ gio/tests/meson.build | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/gio/tests/meson.build b/gio/tests/meson.build
 index a926ae0..a590b9f 100644
 --- a/gio/tests/meson.build
 +++ b/gio/tests/meson.build
-@@ -688,6 +688,13 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
+@@ -798,6 +798,13 @@ if meson.can_run_host_binaries()
    ld = find_program('ld', required : false)
  
    if build_machine.system() == 'linux' and objcopy.found() and objcopy_supports_add_symbol and ld.found()
@@ -30,7 +30,7 @@ index a926ae0..a590b9f 100644
      test_gresource_binary = custom_target('test5.gresource',
        input : 'test5.gresource.xml',
        output : 'test5.gresource',
-@@ -716,12 +723,7 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
+@@ -831,12 +838,7 @@ if meson.can_run_host_binaries()
      test_resources_binary = custom_target('test_resources.o',
        input : test_gresource_binary,
        output : 'test_resources.o',
@@ -43,4 +43,4 @@ index a926ae0..a590b9f 100644
 +      command : ld_subcommand + ['@INPUT@', '-o', '@OUTPUT@'])
  
      # Rename symbol to match the one in the C file
-     test_resources_binary2 = custom_target('test_resources2.o',
+     if cc.get_id() == 'gcc' and host_system == 'windows'

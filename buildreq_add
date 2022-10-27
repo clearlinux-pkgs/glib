@@ -11,8 +11,8 @@ libffi-dev
 libffi-dev32
 libxml2-dev
 libxml2-dev32
-pcre-dev
-pcre-dev32
+pcre2-dev
+pcre2-dev32
 shared-mime-info
 systemd-dev
 systemd-dev32

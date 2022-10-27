@@ -11,7 +11,7 @@ diff --git a/gmodule/gmodule.c b/gmodule/gmodule.c
 index 3c67e2e..130fb07 100644
 --- a/gmodule/gmodule.c
 +++ b/gmodule/gmodule.c
-@@ -538,8 +538,30 @@ g_module_open (const gchar    *file_name,
+@@ -557,8 +557,30 @@ g_module_open_full (const gchar   *file_name,
        return module;
      }
  
