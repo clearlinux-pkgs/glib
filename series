@@ -1,3 +1,5 @@
+glib-stable-branch.patch
+
 0001-gio-Support-a-stateless-configuration-for-compiled-G.patch
 0002-xdg-path.patch
 0003-wakeups.patch

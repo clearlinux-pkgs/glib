@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.74.1
-Release  : 163
+Release  : 164
 URL      : https://download.gnome.org/sources/glib/2.74/glib-2.74.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.74/glib-2.74.1.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -55,14 +55,15 @@ BuildRequires : util-linux-dev32
 BuildRequires : which
 BuildRequires : zlib-dev
 BuildRequires : zlib-dev32
-Patch1: 0001-gio-Support-a-stateless-configuration-for-compiled-G.patch
-Patch2: 0002-xdg-path.patch
-Patch3: 0003-wakeups.patch
-Patch4: 0004-gerror-return-on-null.patch
-Patch5: 0005-gmodule-avx.patch
-Patch6: 0006-Include-a-new-stub-header-to-help-with-multilib-comp.patch
-Patch7: 0007-Check-for-32bit-linker-flag-when-creating-resource-f.patch
-Patch8: 0008-Disable-use-of-close_range.patch
+Patch1: glib-stable-branch.patch
+Patch2: 0001-gio-Support-a-stateless-configuration-for-compiled-G.patch
+Patch3: 0002-xdg-path.patch
+Patch4: 0003-wakeups.patch
+Patch5: 0004-gerror-return-on-null.patch
+Patch6: 0005-gmodule-avx.patch
+Patch7: 0006-Include-a-new-stub-header-to-help-with-multilib-comp.patch
+Patch8: 0007-Check-for-32bit-linker-flag-when-creating-resource-f.patch
+Patch9: 0008-Disable-use-of-close_range.patch
 
 %description
 GLib provides the core application building blocks for libraries and
@@ -218,6 +219,7 @@ cd %{_builddir}/glib-2.74.1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 pushd ..
 cp -a glib-2.74.1 build32
 popd
@@ -230,15 +232,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1666831801
+export SOURCE_DATE_EPOCH=1667492365
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dinstalled_tests=true \
 -Dglib_assert=false \
 -Dglib_checks=true -Dgio_module_dir="/usr/lib64/gio/modules" builddir
@@ -274,13 +276,13 @@ meson test -C builddir --print-errorlogs || : || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/glib
-cp %{_builddir}/glib-%{version}/COPYING %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc
-cp %{_builddir}/glib-%{version}/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/glib/be561fe6eb626c2566b9a6c0885554b4ee4e6b74
-cp %{_builddir}/glib-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/glib/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
-cp %{_builddir}/glib-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/glib/3cb34cfc72e87654683f2894299adf912d14b284
-cp %{_builddir}/glib-%{version}/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc
-cp %{_builddir}/glib-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/glib/adadb67a9875aeeac285309f1eab6e47d9ee08a7
-cp %{_builddir}/glib-%{version}/subprojects/gvdb/COPYING %{buildroot}/usr/share/package-licenses/glib/e2f8b4d1f76ec319b3e525132de7fa2460cac845
+cp %{_builddir}/glib-%{version}/COPYING %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc || :
+cp %{_builddir}/glib-%{version}/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/glib/be561fe6eb626c2566b9a6c0885554b4ee4e6b74 || :
+cp %{_builddir}/glib-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/glib/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
+cp %{_builddir}/glib-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/glib/3cb34cfc72e87654683f2894299adf912d14b284 || :
+cp %{_builddir}/glib-%{version}/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc || :
+cp %{_builddir}/glib-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/glib/adadb67a9875aeeac285309f1eab6e47d9ee08a7 || :
+cp %{_builddir}/glib-%{version}/subprojects/gvdb/COPYING %{buildroot}/usr/share/package-licenses/glib/e2f8b4d1f76ec319b3e525132de7fa2460cac845 || :
 pushd ../build32/
 DESTDIR=%{buildroot} ninja -C builddir install
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
