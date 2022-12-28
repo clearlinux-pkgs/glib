@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.74.1
-Release  : 164
+Release  : 165
 URL      : https://download.gnome.org/sources/glib/2.74/glib-2.74.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.74/glib-2.74.1.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -55,6 +55,9 @@ BuildRequires : util-linux-dev32
 BuildRequires : which
 BuildRequires : zlib-dev
 BuildRequires : zlib-dev32
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: glib-stable-branch.patch
 Patch2: 0001-gio-Support-a-stateless-configuration-for-compiled-G.patch
 Patch3: 0002-xdg-path.patch
@@ -232,15 +235,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667492365
+export SOURCE_DATE_EPOCH=1672248990
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dinstalled_tests=true \
 -Dglib_assert=false \
 -Dglib_checks=true -Dgio_module_dir="/usr/lib64/gio/modules" builddir
@@ -276,13 +279,13 @@ meson test -C builddir --print-errorlogs || : || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/glib
-cp %{_builddir}/glib-%{version}/COPYING %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc || :
-cp %{_builddir}/glib-%{version}/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/glib/be561fe6eb626c2566b9a6c0885554b4ee4e6b74 || :
-cp %{_builddir}/glib-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/glib/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
-cp %{_builddir}/glib-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/glib/3cb34cfc72e87654683f2894299adf912d14b284 || :
-cp %{_builddir}/glib-%{version}/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc || :
-cp %{_builddir}/glib-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/glib/adadb67a9875aeeac285309f1eab6e47d9ee08a7 || :
-cp %{_builddir}/glib-%{version}/subprojects/gvdb/COPYING %{buildroot}/usr/share/package-licenses/glib/e2f8b4d1f76ec319b3e525132de7fa2460cac845 || :
+cp %{_builddir}/glib-%{version}/COPYING %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc
+cp %{_builddir}/glib-%{version}/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/glib/be561fe6eb626c2566b9a6c0885554b4ee4e6b74
+cp %{_builddir}/glib-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/glib/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
+cp %{_builddir}/glib-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/glib/3cb34cfc72e87654683f2894299adf912d14b284
+cp %{_builddir}/glib-%{version}/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/glib/fa05e58320cb7c64786b26396f4b992579a628bc
+cp %{_builddir}/glib-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/glib/adadb67a9875aeeac285309f1eab6e47d9ee08a7
+cp %{_builddir}/glib-%{version}/subprojects/gvdb/COPYING %{buildroot}/usr/share/package-licenses/glib/e2f8b4d1f76ec319b3e525132de7fa2460cac845
 pushd ../build32/
 DESTDIR=%{buildroot} ninja -C builddir install
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
