@@ -1,3 +1,127 @@
+Overview of changes in GLib 2.74.5
+==================================
+
+* Bugs fixed:
+  - #2843 gtk_show_uri can't open browser on MSYS2 on Windows (Luca Bacci)
+  - #2881 Invalid read of size 4 in get_matched_substring_number (Philip
+    Withnall)
+  - #2883 g_file_set_contents fails on mingw64 with "no error" if file size >
+    INT_MAX (CCode)
+  - !3165 gthread-posix: need to #include <errno.h>
+  - !3166 Backport !3160 “GWin32AppInfo: Check for local file path first” to
+    glib-2-74
+  - !3182 Backport !3178 “glocalfileinfo: Don't reset mtime tv_sec when setting
+    tv_usec” to glib-2-74
+  - !3197 Backport !3194 “gregex: Prevent invalid memory access for unmatched
+    subpatterns” to glib-2-74
+  - !3204 Backport !3200 “gfileutils: Use 'write' with 'count' <= max value of
+    its return type” to glib-2-74
+  - !3214 Backport !3213 “gvariant: Optimise g_variant_print() for nested
+    maybes” to glib-2-74
+
+* Translation updates:
+  - Abkhazian (Nart Tlisha)
+
+
+Overview of changes in GLib 2.74.4
+==================================
+
+* Fix missing input validation in `GDBusMenuModel` (work by Lars Uebernickel) (#861)
+
+* Various GVariant security fixes when handling untrusted data (work by
+  William Manley, Philip Withnall, Simon McVittie) (#2121, #2540, #2794, #2797,
+  #2839, #2840, #2841)
+
+* Bugs fixed:
+  - #861 insufficient input validation in GDBusMenuModel (Lars Uebernickel)
+  - #2121 GVariant deserialisation does not match spec for non-normal data
+    (William Manley, Philip Withnall)
+  - #2540 Parsing serialized GVariants can blow up run-time and memory (Philip
+    Withnall)
+  - #2794 GVariant offset table entry size is not checked in is_normal() (Philip
+    Withnall)
+  - #2797 g_variant_byteswap() can take a long time with some non-normal inputs
+    (Philip Withnall)
+  - #2835 gio/gapplication test fails with test_dbus_activate: assertion failed
+    (n_activations == 2): (1 == 2) (Philip Withnall)
+  - #2839 [bisected] GVariant test regression on big-endian architectures (Simon
+    McVittie)
+  - #2840 fuzz_variant_binary_byteswap: Heap-buffer-overflow in
+    g_variant_serialised_get_child (Philip Withnall)
+  - #2841 fuzz_variant_text: Timeout in fuzz_variant_text (Philip Withnall)
+  - #2852 alpine/musl: catching signals from a subprocess triggers
+    GLib:ERROR:../glib/gmain.c:5569:siginfo_t_to_wait_status: code should not be
+    reached (Philip Withnall)
+  - !3114 Backport !3113 “gaction: Validate actions activated over D-Bus” to
+    glib-2-74
+  - !3126 Backport !3125 “Various fixes to normal form handling in GVariant” to
+    glib-2-74
+  - !3134 Backport !3133 “gmenumodel: disallow exporting large menus on the bus”
+    to glib-2-74
+  - !3138 Backport !3136 “gvariant-serialiser: Convert endianness of offsets” to
+    glib-2-74
+  - !3153 Backport !3120 “glib/gthread-posix: Conditionally use `futex` and/or
+    `futex_time64` syscalls...” to glib-2-74
+  - !3161 Backport !3158 ”gmain: Define fallback values for siginfo_t constants
+    for musl” to glib-2-74
+  - !3164 Backport !3163 “gvariant: Check offset table doesn’t fall outside
+    variant bounds and speed up text parsing” to glib-2-74
+
+* Translation updates:
+  - Abkhazian (Nart Tlisha)
+  - Belarusian (Vasil Pupkin)
+  - Georgian (Ekaterine Papava)
+  - Interlingue (Olga Smirnova)
+
+
+Overview of changes in GLib 2.74.3
+==================================
+
+* Fix regression in type checking `g_str_equal()` from C++ projects (#2820)
+
+* Bugs fixed:
+  - #2820 g_str_equal: New macro version breaks compilation in C++ projects
+    (Philip Withnall)
+  - !3096 Backport !3094 “gstrfuncs: Fix regression in C++ types accepted by
+    g_str_equal()” to glib-2-74
+
+
+Overview of changes in GLib 2.74.2
+==================================
+
+* Fix `GVariant` type depths checks on text format variants (work by Philip Withnall) (#2782)
+
+* Fix an obscure corner case with FD handling in `g_spawn_*()` when a process
+  has already closed the standard I/O FDs (work by Ray Strode) (#2795)
+
+* Fix regression in type checking on `const` arguments to `g_str_equal()` (#2809)
+
+* Bugs fixed:
+  - #2782 GVariant type depth not checked on typedecls in text format variants
+    (Philip Withnall)
+  - #2795 [regression] gnome-keyring-daemon uses 100% CPU with glib-2.74.1 (Ray
+    Strode)
+  - #2799 Wrong GTask tag on error return path in
+    g_proxy_resolver_lookup_async() (Michael Catanzaro)
+  - #2809 g_str_equal switched to stricter API (typing) (Philip Withnall)
+  - !3017 Backport !3008 “gio/gdesktopappinfo: Free the wrapped argv array on
+    launch failure” to glib-2-74
+  - !3038 Backport !3035 “portal: Fix broken header guard” to glib-2-74
+  - !3039 Backport !3029 “Revert "Handling collision between standard i/o file
+    descriptors and newly created ones" ” to glib-2-74
+  - !3046 Backport !3045 “gproxyresolver: lookup_finish() should better parallel
+    lookup_async()” to glib-2-74
+  - !3063 Backport !3061 “gvariant-parser: Speed up maybe_wrapper() by an order
+    of magnitude” to glib-2-74
+  - !3084 Backport !3082 “gstrfuncs: Fix regression in types accepted by
+    g_str_equal()” to glib-2-74
+
+* Translation updates:
+  - Abkhazian (Nart Tlisha)
+  - Dutch (Nathan Follens)
+  - Serbian (Мирослав Николић)
+
+
 Overview of changes in GLib 2.74.1
 ==================================
 
