@@ -4,7 +4,7 @@
 #
 Name     : glib
 Version  : 2.74.5
-Release  : 167
+Release  : 168
 URL      : https://download.gnome.org/sources/glib/2.74/glib-2.74.5.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.74/glib-2.74.5.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -234,7 +234,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1674147101
+export SOURCE_DATE_EPOCH=1674583544
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -718,12 +718,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0.7400.5
 /usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7400.5
-/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7400.5-gdb.py
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0.7400.5
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7400.5
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7400.5-gdb.py
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0.7400.5
 /usr/lib64/libgio-2.0.so.0
