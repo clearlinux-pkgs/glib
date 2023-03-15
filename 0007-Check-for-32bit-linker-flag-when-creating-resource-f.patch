@@ -30,17 +30,14 @@ index a926ae0..a590b9f 100644
      test_gresource_binary = custom_target('test5.gresource',
        input : 'test5.gresource.xml',
        output : 'test5.gresource',
-@@ -831,12 +838,7 @@ if meson.can_run_host_binaries()
+@@ -928,9 +928,7 @@
      test_resources_binary = custom_target('test_resources.o',
        input : test_gresource_binary,
        output : 'test_resources.o',
--      command : [ld,
--                 '-z', 'noexecstack',
--                 '-r',
--                 '-b','binary',
--                 '@INPUT@',
--                 '-o','@OUTPUT@'])
+-      command : cc.cmd_array() + ['-Wl,-z,noexecstack', '-r', '-Wl,-b,binary',
+-                                  '@INPUT@', '-o','@OUTPUT@'])
+-
 +      command : ld_subcommand + ['@INPUT@', '-o', '@OUTPUT@'])
- 
      # Rename symbol to match the one in the C file
      if cc.get_id() == 'gcc' and host_system == 'windows'
+       underscore = '_'
