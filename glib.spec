@@ -5,7 +5,7 @@
 #
 Name     : glib
 Version  : 2.76.1
-Release  : 172
+Release  : 173
 URL      : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -18,7 +18,6 @@ Requires: glib-autostart = %{version}-%{release}
 Requires: glib-bin = %{version}-%{release}
 Requires: glib-config = %{version}-%{release}
 Requires: glib-data = %{version}-%{release}
-Requires: glib-filemap = %{version}-%{release}
 Requires: glib-lib = %{version}-%{release}
 Requires: glib-libexec = %{version}-%{release}
 Requires: glib-license = %{version}-%{release}
@@ -90,7 +89,6 @@ Requires: glib-libexec = %{version}-%{release}
 Requires: glib-config = %{version}-%{release}
 Requires: glib-license = %{version}-%{release}
 Requires: glib-services = %{version}-%{release}
-Requires: glib-filemap = %{version}-%{release}
 
 %description bin
 bin components for the glib package.
@@ -137,21 +135,12 @@ Requires: glib-dev = %{version}-%{release}
 dev32 components for the glib package.
 
 
-%package filemap
-Summary: filemap components for the glib package.
-Group: Default
-
-%description filemap
-filemap components for the glib package.
-
-
 %package lib
 Summary: lib components for the glib package.
 Group: Libraries
 Requires: glib-data = %{version}-%{release}
 Requires: glib-libexec = %{version}-%{release}
 Requires: glib-license = %{version}-%{release}
-Requires: glib-filemap = %{version}-%{release}
 
 %description lib
 lib components for the glib package.
@@ -172,7 +161,6 @@ Summary: libexec components for the glib package.
 Group: Default
 Requires: glib-config = %{version}-%{release}
 Requires: glib-license = %{version}-%{release}
-Requires: glib-filemap = %{version}-%{release}
 
 %description libexec
 libexec components for the glib package.
@@ -197,6 +185,7 @@ locales components for the glib package.
 %package services
 Summary: services components for the glib package.
 Group: Systemd services
+Requires: systemd
 
 %description services
 services components for the glib package.
@@ -233,15 +222,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680026059
+export SOURCE_DATE_EPOCH=1682969479
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dinstalled_tests=true \
 -Dglib_assert=false \
 -Dglib_checks=true -Dgio_module_dir="/usr/lib64/gio/modules" builddir
@@ -335,6 +324,16 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/gapplication
+/V3/usr/bin/gdbus
+/V3/usr/bin/gio
+/V3/usr/bin/gio-querymodules
+/V3/usr/bin/glib-compile-resources
+/V3/usr/bin/glib-compile-schemas
+/V3/usr/bin/gobject-query
+/V3/usr/bin/gresource
+/V3/usr/bin/gsettings
+/V3/usr/bin/gtester
 /usr/bin/gapplication
 /usr/bin/gdbus
 /usr/bin/gdbus-codegen
@@ -350,7 +349,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/bin/gsettings
 /usr/bin/gtester
 /usr/bin/gtester-report
-/usr/share/clear/optimized-elf/bin*
 
 %files config
 %defattr(-,root,root,-)
@@ -387,6 +385,11 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libgio-2.0.so
+/V3/usr/lib64/libglib-2.0.so
+/V3/usr/lib64/libgmodule-2.0.so
+/V3/usr/lib64/libgobject-2.0.so
+/V3/usr/lib64/libgthread-2.0.so
 /usr/include/gio-unix-2.0/gio/gdesktopappinfo.h
 /usr/include/gio-unix-2.0/gio/gfiledescriptorbased.h
 /usr/include/gio-unix-2.0/gio/gunixfdmessage.h
@@ -670,11 +673,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/include/glib-2.0/gobject/gvaluetypes.h
 /usr/lib32/glib-2.0/include/glibconfig.h
 /usr/lib64/glib-2.0/include/glibconfig.h
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so
 /usr/lib64/libgio-2.0.so
 /usr/lib64/libglib-2.0.so
 /usr/lib64/libgmodule-2.0.so
@@ -714,22 +712,18 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/lib32/pkgconfig/gobject-2.0.pc
 /usr/lib32/pkgconfig/gthread-2.0.pc
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-glib
-
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgio-2.0.so.0.7600.1
-/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libglib-2.0.so.0.7600.1
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgmodule-2.0.so.0.7600.1
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgobject-2.0.so.0.7600.1
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgthread-2.0.so.0.7600.1
+/V3/usr/lib64/libgio-2.0.so.0
+/V3/usr/lib64/libgio-2.0.so.0.7600.1
+/V3/usr/lib64/libglib-2.0.so.0
+/V3/usr/lib64/libglib-2.0.so.0.7600.1
+/V3/usr/lib64/libgmodule-2.0.so.0
+/V3/usr/lib64/libgmodule-2.0.so.0.7600.1
+/V3/usr/lib64/libgobject-2.0.so.0
+/V3/usr/lib64/libgobject-2.0.so.0.7600.1
+/V3/usr/lib64/libgthread-2.0.so.0
+/V3/usr/lib64/libgthread-2.0.so.0.7600.1
 /usr/lib64/libgio-2.0.so.0
 /usr/lib64/libgio-2.0.so.0.7600.1
 /usr/lib64/libglib-2.0.so.0
@@ -756,9 +750,9 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files libexec
 %defattr(-,root,root,-)
+/V3/usr/libexec/gio-launch-desktop
 /usr/libexec/gio-launch-desktop
 /usr/libexec/glib-compile-schemas
-/usr/share/clear/optimized-elf/exec*
 
 %files license
 %defattr(0644,root,root,0755)
@@ -778,6 +772,325 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files tests
 %defattr(-,root,root,-)
+/V3/usr/libexec/installed-tests/glib/1bit-mutex
+/V3/usr/libexec/installed-tests/glib/642026
+/V3/usr/libexec/installed-tests/glib/642026-ec
+/V3/usr/libexec/installed-tests/glib/accumulator
+/V3/usr/libexec/installed-tests/glib/actions
+/V3/usr/libexec/installed-tests/glib/appinfo-test
+/V3/usr/libexec/installed-tests/glib/application-command-line
+/V3/usr/libexec/installed-tests/glib/appmonitor
+/V3/usr/libexec/installed-tests/glib/apps
+/V3/usr/libexec/installed-tests/glib/array-test
+/V3/usr/libexec/installed-tests/glib/assert-msg-test
+/V3/usr/libexec/installed-tests/glib/async-close-output-stream
+/V3/usr/libexec/installed-tests/glib/async-splice-output-stream
+/V3/usr/libexec/installed-tests/glib/asyncqueue
+/V3/usr/libexec/installed-tests/glib/atomic
+/V3/usr/libexec/installed-tests/glib/atomic-c-11
+/V3/usr/libexec/installed-tests/glib/atomic-c-17
+/V3/usr/libexec/installed-tests/glib/atomic-c-90
+/V3/usr/libexec/installed-tests/glib/atomic-c-99
+/V3/usr/libexec/installed-tests/glib/autoptr
+/V3/usr/libexec/installed-tests/glib/autoptr-gio
+/V3/usr/libexec/installed-tests/glib/base64
+/V3/usr/libexec/installed-tests/glib/basic-application
+/V3/usr/libexec/installed-tests/glib/basic-signals
+/V3/usr/libexec/installed-tests/glib/basics-gobject
+/V3/usr/libexec/installed-tests/glib/binding
+/V3/usr/libexec/installed-tests/glib/bindinggroup
+/V3/usr/libexec/installed-tests/glib/bitlock
+/V3/usr/libexec/installed-tests/glib/bookmarkfile
+/V3/usr/libexec/installed-tests/glib/boxed
+/V3/usr/libexec/installed-tests/glib/buffered-input-stream
+/V3/usr/libexec/installed-tests/glib/buffered-output-stream
+/V3/usr/libexec/installed-tests/glib/bytes
+/V3/usr/libexec/installed-tests/glib/cache
+/V3/usr/libexec/installed-tests/glib/cancellable
+/V3/usr/libexec/installed-tests/glib/charset
+/V3/usr/libexec/installed-tests/glib/checksum
+/V3/usr/libexec/installed-tests/glib/closure
+/V3/usr/libexec/installed-tests/glib/closure-refcount
+/V3/usr/libexec/installed-tests/glib/collate
+/V3/usr/libexec/installed-tests/glib/completion
+/V3/usr/libexec/installed-tests/glib/cond
+/V3/usr/libexec/installed-tests/glib/contenttype
+/V3/usr/libexec/installed-tests/glib/contexts
+/V3/usr/libexec/installed-tests/glib/convert
+/V3/usr/libexec/installed-tests/glib/converter-stream
+/V3/usr/libexec/installed-tests/glib/credentials
+/V3/usr/libexec/installed-tests/glib/custom-dispatch
+/V3/usr/libexec/installed-tests/glib/cxx
+/V3/usr/libexec/installed-tests/glib/cxx-03
+/V3/usr/libexec/installed-tests/glib/cxx-11
+/V3/usr/libexec/installed-tests/glib/cxx-14
+/V3/usr/libexec/installed-tests/glib/cxx-17
+/V3/usr/libexec/installed-tests/glib/cxx-20
+/V3/usr/libexec/installed-tests/glib/cxx-2b
+/V3/usr/libexec/installed-tests/glib/cxx-98
+/V3/usr/libexec/installed-tests/glib/data-input-stream
+/V3/usr/libexec/installed-tests/glib/data-output-stream
+/V3/usr/libexec/installed-tests/glib/dataset
+/V3/usr/libexec/installed-tests/glib/date
+/V3/usr/libexec/installed-tests/glib/dbus-appinfo
+/V3/usr/libexec/installed-tests/glib/dbus-launch
+/V3/usr/libexec/installed-tests/glib/debugcontroller
+/V3/usr/libexec/installed-tests/glib/defaultiface
+/V3/usr/libexec/installed-tests/glib/defaultvalue
+/V3/usr/libexec/installed-tests/glib/deftype
+/V3/usr/libexec/installed-tests/glib/deprecated-properties
+/V3/usr/libexec/installed-tests/glib/dir
+/V3/usr/libexec/installed-tests/glib/dynamictests
+/V3/usr/libexec/installed-tests/glib/dynamictype
+/V3/usr/libexec/installed-tests/glib/enums
+/V3/usr/libexec/installed-tests/glib/environment
+/V3/usr/libexec/installed-tests/glib/error
+/V3/usr/libexec/installed-tests/glib/fake-document-portal
+/V3/usr/libexec/installed-tests/glib/fake-service-name
+/V3/usr/libexec/installed-tests/glib/fdo-notification-backend
+/V3/usr/libexec/installed-tests/glib/file
+/V3/usr/libexec/installed-tests/glib/file-thumbnail
+/V3/usr/libexec/installed-tests/glib/fileattributematcher
+/V3/usr/libexec/installed-tests/glib/fileutils
+/V3/usr/libexec/installed-tests/glib/filter-streams
+/V3/usr/libexec/installed-tests/glib/flags
+/V3/usr/libexec/installed-tests/glib/g-file
+/V3/usr/libexec/installed-tests/glib/g-file-info
+/V3/usr/libexec/installed-tests/glib/g-file-info-filesystem-readonly
+/V3/usr/libexec/installed-tests/glib/g-icon
+/V3/usr/libexec/installed-tests/glib/gapplication
+/V3/usr/libexec/installed-tests/glib/gdatetime
+/V3/usr/libexec/installed-tests/glib/gdbus-address-get-session
+/V3/usr/libexec/installed-tests/glib/gdbus-addresses
+/V3/usr/libexec/installed-tests/glib/gdbus-auth
+/V3/usr/libexec/installed-tests/glib/gdbus-bz627724
+/V3/usr/libexec/installed-tests/glib/gdbus-close-pending
+/V3/usr/libexec/installed-tests/glib/gdbus-connection
+/V3/usr/libexec/installed-tests/glib/gdbus-connection-flush
+/V3/usr/libexec/installed-tests/glib/gdbus-connection-flush-helper
+/V3/usr/libexec/installed-tests/glib/gdbus-connection-loss
+/V3/usr/libexec/installed-tests/glib/gdbus-connection-slow
+/V3/usr/libexec/installed-tests/glib/gdbus-error
+/V3/usr/libexec/installed-tests/glib/gdbus-exit-on-close
+/V3/usr/libexec/installed-tests/glib/gdbus-export
+/V3/usr/libexec/installed-tests/glib/gdbus-introspection
+/V3/usr/libexec/installed-tests/glib/gdbus-message
+/V3/usr/libexec/installed-tests/glib/gdbus-method-invocation
+/V3/usr/libexec/installed-tests/glib/gdbus-names
+/V3/usr/libexec/installed-tests/glib/gdbus-non-socket
+/V3/usr/libexec/installed-tests/glib/gdbus-overflow
+/V3/usr/libexec/installed-tests/glib/gdbus-peer
+/V3/usr/libexec/installed-tests/glib/gdbus-peer-object-manager
+/V3/usr/libexec/installed-tests/glib/gdbus-proxy
+/V3/usr/libexec/installed-tests/glib/gdbus-proxy-threads
+/V3/usr/libexec/installed-tests/glib/gdbus-proxy-unique-name
+/V3/usr/libexec/installed-tests/glib/gdbus-proxy-well-known-name
+/V3/usr/libexec/installed-tests/glib/gdbus-sasl
+/V3/usr/libexec/installed-tests/glib/gdbus-serialization
+/V3/usr/libexec/installed-tests/glib/gdbus-server-auth
+/V3/usr/libexec/installed-tests/glib/gdbus-test-codegen
+/V3/usr/libexec/installed-tests/glib/gdbus-test-codegen-min-required-2-64
+/V3/usr/libexec/installed-tests/glib/gdbus-test-codegen-old
+/V3/usr/libexec/installed-tests/glib/gdbus-testserver
+/V3/usr/libexec/installed-tests/glib/gdbus-threading
+/V3/usr/libexec/installed-tests/glib/getpwuid-preload.so
+/V3/usr/libexec/installed-tests/glib/giomodule
+/V3/usr/libexec/installed-tests/glib/glistmodel
+/V3/usr/libexec/installed-tests/glib/gmenumodel
+/V3/usr/libexec/installed-tests/glib/gnotification
+/V3/usr/libexec/installed-tests/glib/gobject-private
+/V3/usr/libexec/installed-tests/glib/gsocketclient-slow
+/V3/usr/libexec/installed-tests/glib/gsubprocess
+/V3/usr/libexec/installed-tests/glib/gsubprocess-testprog
+/V3/usr/libexec/installed-tests/glib/gutils-user-database
+/V3/usr/libexec/installed-tests/glib/guuid
+/V3/usr/libexec/installed-tests/glib/gvariant
+/V3/usr/libexec/installed-tests/glib/hash
+/V3/usr/libexec/installed-tests/glib/hmac
+/V3/usr/libexec/installed-tests/glib/hook
+/V3/usr/libexec/installed-tests/glib/hostutils
+/V3/usr/libexec/installed-tests/glib/ifaceproperties
+/V3/usr/libexec/installed-tests/glib/include
+/V3/usr/libexec/installed-tests/glib/inet-address
+/V3/usr/libexec/installed-tests/glib/init
+/V3/usr/libexec/installed-tests/glib/io-channel
+/V3/usr/libexec/installed-tests/glib/io-channel-basic
+/V3/usr/libexec/installed-tests/glib/io-stream
+/V3/usr/libexec/installed-tests/glib/keyfile
+/V3/usr/libexec/installed-tests/glib/libgdbus-example-objectmanager.so
+/V3/usr/libexec/installed-tests/glib/libmoduletestplugin_a_library.so
+/V3/usr/libexec/installed-tests/glib/libmoduletestplugin_a_plugin.so
+/V3/usr/libexec/installed-tests/glib/libmoduletestplugin_b_library.so
+/V3/usr/libexec/installed-tests/glib/libmoduletestplugin_b_plugin.so
+/V3/usr/libexec/installed-tests/glib/libresourceplugin.so
+/V3/usr/libexec/installed-tests/glib/list
+/V3/usr/libexec/installed-tests/glib/live-g-file
+/V3/usr/libexec/installed-tests/glib/logging
+/V3/usr/libexec/installed-tests/glib/macros
+/V3/usr/libexec/installed-tests/glib/macros-c-11
+/V3/usr/libexec/installed-tests/glib/macros-c-17
+/V3/usr/libexec/installed-tests/glib/macros-c-90
+/V3/usr/libexec/installed-tests/glib/macros-c-99
+/V3/usr/libexec/installed-tests/glib/mainloop
+/V3/usr/libexec/installed-tests/glib/mappedfile
+/V3/usr/libexec/installed-tests/glib/mapping
+/V3/usr/libexec/installed-tests/glib/markup
+/V3/usr/libexec/installed-tests/glib/markup-collect
+/V3/usr/libexec/installed-tests/glib/markup-escape
+/V3/usr/libexec/installed-tests/glib/markup-parse
+/V3/usr/libexec/installed-tests/glib/markup-subparser
+/V3/usr/libexec/installed-tests/glib/mem-overflow
+/V3/usr/libexec/installed-tests/glib/memchunk
+/V3/usr/libexec/installed-tests/glib/memory-input-stream
+/V3/usr/libexec/installed-tests/glib/memory-monitor
+/V3/usr/libexec/installed-tests/glib/memory-output-stream
+/V3/usr/libexec/installed-tests/glib/memory-settings-backend
+/V3/usr/libexec/installed-tests/glib/messages-low-memory
+/V3/usr/libexec/installed-tests/glib/mimeapps
+/V3/usr/libexec/installed-tests/glib/module-test-library
+/V3/usr/libexec/installed-tests/glib/module-test-plugin
+/V3/usr/libexec/installed-tests/glib/modules/libtestmodulea.so
+/V3/usr/libexec/installed-tests/glib/modules/libtestmoduleb.so
+/V3/usr/libexec/installed-tests/glib/mount-operation
+/V3/usr/libexec/installed-tests/glib/mutex
+/V3/usr/libexec/installed-tests/glib/network-address
+/V3/usr/libexec/installed-tests/glib/network-monitor
+/V3/usr/libexec/installed-tests/glib/network-monitor-race
+/V3/usr/libexec/installed-tests/glib/node
+/V3/usr/libexec/installed-tests/glib/notify-init
+/V3/usr/libexec/installed-tests/glib/notify-init2
+/V3/usr/libexec/installed-tests/glib/null-settings-backend
+/V3/usr/libexec/installed-tests/glib/object
+/V3/usr/libexec/installed-tests/glib/objects-refcount1
+/V3/usr/libexec/installed-tests/glib/objects-refcount2
+/V3/usr/libexec/installed-tests/glib/once
+/V3/usr/libexec/installed-tests/glib/onceinit
+/V3/usr/libexec/installed-tests/glib/option-argv0
+/V3/usr/libexec/installed-tests/glib/option-context
+/V3/usr/libexec/installed-tests/glib/overflow
+/V3/usr/libexec/installed-tests/glib/overflow-fallback
+/V3/usr/libexec/installed-tests/glib/override
+/V3/usr/libexec/installed-tests/glib/param
+/V3/usr/libexec/installed-tests/glib/path-test-subdir/spawn-test-helper
+/V3/usr/libexec/installed-tests/glib/pathbuf
+/V3/usr/libexec/installed-tests/glib/pattern
+/V3/usr/libexec/installed-tests/glib/performance
+/V3/usr/libexec/installed-tests/glib/performance-threaded
+/V3/usr/libexec/installed-tests/glib/permission
+/V3/usr/libexec/installed-tests/glib/pollable
+/V3/usr/libexec/installed-tests/glib/portal-support-env-var
+/V3/usr/libexec/installed-tests/glib/portal-support-flatpak-full
+/V3/usr/libexec/installed-tests/glib/portal-support-flatpak-gsettings-only
+/V3/usr/libexec/installed-tests/glib/portal-support-flatpak-network-only
+/V3/usr/libexec/installed-tests/glib/portal-support-flatpak-none
+/V3/usr/libexec/installed-tests/glib/portal-support-none
+/V3/usr/libexec/installed-tests/glib/portal-support-snap
+/V3/usr/libexec/installed-tests/glib/portal-support-snap-classic
+/V3/usr/libexec/installed-tests/glib/power-profile-monitor
+/V3/usr/libexec/installed-tests/glib/private
+/V3/usr/libexec/installed-tests/glib/properties
+/V3/usr/libexec/installed-tests/glib/properties-refcount1
+/V3/usr/libexec/installed-tests/glib/properties-refcount2
+/V3/usr/libexec/installed-tests/glib/properties-refcount3
+/V3/usr/libexec/installed-tests/glib/properties-refcount4
+/V3/usr/libexec/installed-tests/glib/protocol
+/V3/usr/libexec/installed-tests/glib/proxy-test
+/V3/usr/libexec/installed-tests/glib/qdata
+/V3/usr/libexec/installed-tests/glib/queue
+/V3/usr/libexec/installed-tests/glib/rand
+/V3/usr/libexec/installed-tests/glib/rcbox
+/V3/usr/libexec/installed-tests/glib/readwrite
+/V3/usr/libexec/installed-tests/glib/rec-mutex
+/V3/usr/libexec/installed-tests/glib/refcount
+/V3/usr/libexec/installed-tests/glib/refcount-macro
+/V3/usr/libexec/installed-tests/glib/reference
+/V3/usr/libexec/installed-tests/glib/references
+/V3/usr/libexec/installed-tests/glib/refstring
+/V3/usr/libexec/installed-tests/glib/regex
+/V3/usr/libexec/installed-tests/glib/relation
+/V3/usr/libexec/installed-tests/glib/resolver-parsing
+/V3/usr/libexec/installed-tests/glib/resources
+/V3/usr/libexec/installed-tests/glib/rwlock
+/V3/usr/libexec/installed-tests/glib/sandbox
+/V3/usr/libexec/installed-tests/glib/scannerapi
+/V3/usr/libexec/installed-tests/glib/search-utils
+/V3/usr/libexec/installed-tests/glib/sequence
+/V3/usr/libexec/installed-tests/glib/shell
+/V3/usr/libexec/installed-tests/glib/signal-handler
+/V3/usr/libexec/installed-tests/glib/signalgroup
+/V3/usr/libexec/installed-tests/glib/signals
+/V3/usr/libexec/installed-tests/glib/signals-refcount1
+/V3/usr/libexec/installed-tests/glib/signals-refcount2
+/V3/usr/libexec/installed-tests/glib/signals-refcount3
+/V3/usr/libexec/installed-tests/glib/signals-refcount4
+/V3/usr/libexec/installed-tests/glib/simple-async-result
+/V3/usr/libexec/installed-tests/glib/simple-proxy
+/V3/usr/libexec/installed-tests/glib/singleton
+/V3/usr/libexec/installed-tests/glib/sleepy-stream
+/V3/usr/libexec/installed-tests/glib/slice
+/V3/usr/libexec/installed-tests/glib/slist
+/V3/usr/libexec/installed-tests/glib/slow-connect-preload.so
+/V3/usr/libexec/installed-tests/glib/socket
+/V3/usr/libexec/installed-tests/glib/socket-address
+/V3/usr/libexec/installed-tests/glib/socket-listener
+/V3/usr/libexec/installed-tests/glib/socket-service
+/V3/usr/libexec/installed-tests/glib/sort
+/V3/usr/libexec/installed-tests/glib/spawn-multithreaded
+/V3/usr/libexec/installed-tests/glib/spawn-path-search
+/V3/usr/libexec/installed-tests/glib/spawn-path-search-helper
+/V3/usr/libexec/installed-tests/glib/spawn-singlethread
+/V3/usr/libexec/installed-tests/glib/spawn-test
+/V3/usr/libexec/installed-tests/glib/spawn-test-helper
+/V3/usr/libexec/installed-tests/glib/srvtarget
+/V3/usr/libexec/installed-tests/glib/stream-rw_all
+/V3/usr/libexec/installed-tests/glib/strfuncs
+/V3/usr/libexec/installed-tests/glib/string
+/V3/usr/libexec/installed-tests/glib/strvbuilder
+/V3/usr/libexec/installed-tests/glib/task
+/V3/usr/libexec/installed-tests/glib/test-printf
+/V3/usr/libexec/installed-tests/glib/test-spawn-echo
+/V3/usr/libexec/installed-tests/glib/testfilemonitor
+/V3/usr/libexec/installed-tests/glib/testing
+/V3/usr/libexec/installed-tests/glib/testing-helper
+/V3/usr/libexec/installed-tests/glib/thread
+/V3/usr/libexec/installed-tests/glib/thread-deprecated
+/V3/usr/libexec/installed-tests/glib/thread-pool
+/V3/usr/libexec/installed-tests/glib/thread-pool-slow
+/V3/usr/libexec/installed-tests/glib/threadtests
+/V3/usr/libexec/installed-tests/glib/thumbnail-verification
+/V3/usr/libexec/installed-tests/glib/timeout
+/V3/usr/libexec/installed-tests/glib/timer
+/V3/usr/libexec/installed-tests/glib/tls-bindings
+/V3/usr/libexec/installed-tests/glib/tls-certificate
+/V3/usr/libexec/installed-tests/glib/tls-database
+/V3/usr/libexec/installed-tests/glib/tls-interaction
+/V3/usr/libexec/installed-tests/glib/trash
+/V3/usr/libexec/installed-tests/glib/tree
+/V3/usr/libexec/installed-tests/glib/type
+/V3/usr/libexec/installed-tests/glib/type-flags
+/V3/usr/libexec/installed-tests/glib/types
+/V3/usr/libexec/installed-tests/glib/unicode
+/V3/usr/libexec/installed-tests/glib/unicode-encoding
+/V3/usr/libexec/installed-tests/glib/unicode-normalize
+/V3/usr/libexec/installed-tests/glib/unix
+/V3/usr/libexec/installed-tests/glib/unix-fd
+/V3/usr/libexec/installed-tests/glib/unix-mounts
+/V3/usr/libexec/installed-tests/glib/unix-streams
+/V3/usr/libexec/installed-tests/glib/uri
+/V3/usr/libexec/installed-tests/glib/utf8-misc
+/V3/usr/libexec/installed-tests/glib/utf8-performance
+/V3/usr/libexec/installed-tests/glib/utf8-pointer
+/V3/usr/libexec/installed-tests/glib/utf8-validate
+/V3/usr/libexec/installed-tests/glib/utils
+/V3/usr/libexec/installed-tests/glib/utils-c-11
+/V3/usr/libexec/installed-tests/glib/utils-c-17
+/V3/usr/libexec/installed-tests/glib/utils-c-90
+/V3/usr/libexec/installed-tests/glib/utils-c-99
+/V3/usr/libexec/installed-tests/glib/utils-isolated
+/V3/usr/libexec/installed-tests/glib/value
+/V3/usr/libexec/installed-tests/glib/vfs
+/V3/usr/libexec/installed-tests/glib/volumemonitor
+/V3/usr/libexec/installed-tests/glib/win32-appinfo
 /usr/libexec/installed-tests/glib/1bit-mutex
 /usr/libexec/installed-tests/glib/4096-random-bytes
 /usr/libexec/installed-tests/glib/642026
@@ -1393,7 +1706,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/libexec/installed-tests/glib/x-content/image-dcf/DCIM/Camera/20130831_203928.jpg
 /usr/libexec/installed-tests/glib/x-content/unix-software/autorun.sh
 /usr/libexec/installed-tests/glib/x-content/win32-software/autorun.exe
-/usr/share/clear/optimized-elf/test*
 /usr/share/installed-tests/glib/1bit-mutex.test
 /usr/share/installed-tests/glib/642026-ec.test
 /usr/share/installed-tests/glib/642026.test
