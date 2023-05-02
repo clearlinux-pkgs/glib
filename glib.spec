@@ -5,7 +5,7 @@
 #
 Name     : glib
 Version  : 2.76.1
-Release  : 173
+Release  : 174
 URL      : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -222,7 +222,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682969479
+export SOURCE_DATE_EPOCH=1682988565
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -308,6 +308,7 @@ ln -s /usr/lib/systemd/system/glib-schemas-firstboot.service %{buildroot}/usr/li
 # place it in libexec (with compat)
 mkdir -p %{buildroot}/usr/libexec
 mv %{buildroot}/usr/bin/glib-compile-schemas %{buildroot}/usr/libexec/glib-compile-schemas
+rm %{buildroot}*/usr/bin/glib-compile-schemas
 ln -s ../libexec/glib-compile-schemas %{buildroot}/usr/bin
 
 # fix busted multlib compiles by providing custom header to include the right architecture file
@@ -329,7 +330,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /V3/usr/bin/gio
 /V3/usr/bin/gio-querymodules
 /V3/usr/bin/glib-compile-resources
-/V3/usr/bin/glib-compile-schemas
 /V3/usr/bin/gobject-query
 /V3/usr/bin/gresource
 /V3/usr/bin/gsettings
