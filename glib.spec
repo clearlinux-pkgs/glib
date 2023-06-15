@@ -5,7 +5,7 @@
 #
 Name     : glib
 Version  : 2.76.1
-Release  : 174
+Release  : 175
 URL      : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -203,13 +203,13 @@ tests components for the glib package.
 %prep
 %setup -q -n glib-2.76.1
 cd %{_builddir}/glib-2.76.1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
+%patch -P 5 -p1
+%patch -P 6 -p1
+%patch -P 7 -p1
 pushd ..
 cp -a glib-2.76.1 build32
 popd
@@ -222,7 +222,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682988565
+export SOURCE_DATE_EPOCH=1686870768
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -385,11 +385,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgio-2.0.so
-/V3/usr/lib64/libglib-2.0.so
-/V3/usr/lib64/libgmodule-2.0.so
-/V3/usr/lib64/libgobject-2.0.so
-/V3/usr/lib64/libgthread-2.0.so
 /usr/include/gio-unix-2.0/gio/gdesktopappinfo.h
 /usr/include/gio-unix-2.0/gio/gfiledescriptorbased.h
 /usr/include/gio-unix-2.0/gio/gunixfdmessage.h
@@ -714,15 +709,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgio-2.0.so.0
 /V3/usr/lib64/libgio-2.0.so.0.7600.1
-/V3/usr/lib64/libglib-2.0.so.0
 /V3/usr/lib64/libglib-2.0.so.0.7600.1
-/V3/usr/lib64/libgmodule-2.0.so.0
 /V3/usr/lib64/libgmodule-2.0.so.0.7600.1
-/V3/usr/lib64/libgobject-2.0.so.0
 /V3/usr/lib64/libgobject-2.0.so.0.7600.1
-/V3/usr/lib64/libgthread-2.0.so.0
 /V3/usr/lib64/libgthread-2.0.so.0.7600.1
 /usr/lib64/libgio-2.0.so.0
 /usr/lib64/libgio-2.0.so.0.7600.1
