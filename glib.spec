@@ -4,10 +4,10 @@
 # Using build pattern: meson
 #
 Name     : glib
-Version  : 2.76.1
-Release  : 175
-URL      : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
-Source0  : https://download.gnome.org/sources/glib/2.76/glib-2.76.1.tar.xz
+Version  : 2.78.0
+Release  : 176
+URL      : https://download.gnome.org/sources/glib/2.78/glib-2.78.0.tar.xz
+Source0  : https://download.gnome.org/sources/glib/2.78/glib-2.78.0.tar.xz
 Source1  : glib-schemas-firstboot.service
 Source2  : glib-schemas-trigger.service
 Source3  : glib.tmpfiles
@@ -201,8 +201,8 @@ tests components for the glib package.
 
 
 %prep
-%setup -q -n glib-2.76.1
-cd %{_builddir}/glib-2.76.1
+%setup -q -n glib-2.78.0
+cd %{_builddir}/glib-2.78.0
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
@@ -211,10 +211,10 @@ cd %{_builddir}/glib-2.76.1
 %patch -P 6 -p1
 %patch -P 7 -p1
 pushd ..
-cp -a glib-2.76.1 build32
+cp -a glib-2.78.0 build32
 popd
 pushd ..
-cp -a glib-2.76.1 buildavx2
+cp -a glib-2.78.0 buildavx2
 popd
 
 %build
@@ -222,7 +222,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686870768
+export SOURCE_DATE_EPOCH=1694211119
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -361,10 +361,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/share/bash-completion/completions/gio
 /usr/share/bash-completion/completions/gresource
 /usr/share/bash-completion/completions/gsettings
-/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.7600.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.7600.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.7600.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.7600.1-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.7800.0-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.7800.0-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.7800.0-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.7800.0-gdb.py
 /usr/share/gettext/its/gschema.its
 /usr/share/gettext/its/gschema.loc
 /usr/share/glib-2.0/codegen/__init__.py
@@ -377,6 +377,7 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/share/glib-2.0/codegen/dbustypes.py
 /usr/share/glib-2.0/codegen/parser.py
 /usr/share/glib-2.0/codegen/utils.py
+/usr/share/glib-2.0/dtds/gresource.dtd
 /usr/share/glib-2.0/gdb/glib_gdb.py
 /usr/share/glib-2.0/gdb/gobject_gdb.py
 /usr/share/glib-2.0/gettext/po/Makefile.in.in
@@ -709,34 +710,34 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgio-2.0.so.0.7600.1
-/V3/usr/lib64/libglib-2.0.so.0.7600.1
-/V3/usr/lib64/libgmodule-2.0.so.0.7600.1
-/V3/usr/lib64/libgobject-2.0.so.0.7600.1
-/V3/usr/lib64/libgthread-2.0.so.0.7600.1
+/V3/usr/lib64/libgio-2.0.so.0.7800.0
+/V3/usr/lib64/libglib-2.0.so.0.7800.0
+/V3/usr/lib64/libgmodule-2.0.so.0.7800.0
+/V3/usr/lib64/libgobject-2.0.so.0.7800.0
+/V3/usr/lib64/libgthread-2.0.so.0.7800.0
 /usr/lib64/libgio-2.0.so.0
-/usr/lib64/libgio-2.0.so.0.7600.1
+/usr/lib64/libgio-2.0.so.0.7800.0
 /usr/lib64/libglib-2.0.so.0
-/usr/lib64/libglib-2.0.so.0.7600.1
+/usr/lib64/libglib-2.0.so.0.7800.0
 /usr/lib64/libgmodule-2.0.so.0
-/usr/lib64/libgmodule-2.0.so.0.7600.1
+/usr/lib64/libgmodule-2.0.so.0.7800.0
 /usr/lib64/libgobject-2.0.so.0
-/usr/lib64/libgobject-2.0.so.0.7600.1
+/usr/lib64/libgobject-2.0.so.0.7800.0
 /usr/lib64/libgthread-2.0.so.0
-/usr/lib64/libgthread-2.0.so.0.7600.1
+/usr/lib64/libgthread-2.0.so.0.7800.0
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libgio-2.0.so.0
-/usr/lib32/libgio-2.0.so.0.7600.1
+/usr/lib32/libgio-2.0.so.0.7800.0
 /usr/lib32/libglib-2.0.so.0
-/usr/lib32/libglib-2.0.so.0.7600.1
+/usr/lib32/libglib-2.0.so.0.7800.0
 /usr/lib32/libgmodule-2.0.so.0
-/usr/lib32/libgmodule-2.0.so.0.7600.1
+/usr/lib32/libgmodule-2.0.so.0.7800.0
 /usr/lib32/libgobject-2.0.so.0
-/usr/lib32/libgobject-2.0.so.0.7600.1
+/usr/lib32/libgobject-2.0.so.0.7800.0
 /usr/lib32/libgthread-2.0.so.0
-/usr/lib32/libgthread-2.0.so.0.7600.1
+/usr/lib32/libgthread-2.0.so.0.7800.0
 
 %files libexec
 %defattr(-,root,root,-)
