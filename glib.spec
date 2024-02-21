@@ -7,7 +7,7 @@
 #
 Name     : glib
 Version  : 2.78.4
-Release  : 180
+Release  : 181
 URL      : https://download.gnome.org/sources/glib/2.78/glib-2.78.4.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.78/glib-2.78.4.tar.xz
 Source1  : glib-schemas-firstboot.service
