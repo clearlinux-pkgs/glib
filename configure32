@@ -1,1 +1,2 @@
 -Dgio_module_dir="/usr/lib32/gio/modules"
+-Dintrospection=disabled

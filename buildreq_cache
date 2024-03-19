@@ -1,4 +1,5 @@
-2.78.4
+2.80.0
 bash-completion-dev
 pkgconfig(bash-completion)
+pypi-docutils
 valgrind

@@ -17,9 +17,9 @@ index a926ae0..a590b9f 100644
 --- a/gio/tests/meson.build
 +++ b/gio/tests/meson.build
 @@ -798,6 +798,13 @@ if meson.can_run_host_binaries()
-   ld = find_program('ld', required : false)
+   else
+     why_no_external_data = ''
  
-   if build_machine.system() == 'linux' and objcopy.found() and objcopy_supports_add_symbol and ld.found()
 +    ld_subcommand = ['ld', '-r', '-b', 'binary']
 +    pym = import('python3')
 +    py3 = pym.find_python()
