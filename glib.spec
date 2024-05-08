@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : glib
-Version  : 2.80.1
-Release  : 183
-URL      : https://download.gnome.org/sources/glib/2.80/glib-2.80.1.tar.xz
-Source0  : https://download.gnome.org/sources/glib/2.80/glib-2.80.1.tar.xz
+Version  : 2.80.2
+Release  : 184
+URL      : https://download.gnome.org/sources/glib/2.80/glib-2.80.2.tar.xz
+Source0  : https://download.gnome.org/sources/glib/2.80/glib-2.80.2.tar.xz
 Source1  : glib-schemas-firstboot.service
 Source2  : glib-schemas-trigger.service
 Source3  : glib.tmpfiles
@@ -204,8 +204,8 @@ tests components for the glib package.
 
 
 %prep
-%setup -q -n glib-2.80.1
-cd %{_builddir}/glib-2.80.1
+%setup -q -n glib-2.80.2
+cd %{_builddir}/glib-2.80.2
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
@@ -214,10 +214,10 @@ cd %{_builddir}/glib-2.80.1
 %patch -P 6 -p1
 %patch -P 7 -p1
 pushd ..
-cp -a glib-2.80.1 build32
+cp -a glib-2.80.2 build32
 popd
 pushd ..
-cp -a glib-2.80.1 buildavx2
+cp -a glib-2.80.2 buildavx2
 popd
 
 %build
@@ -225,15 +225,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1715116461
+export SOURCE_DATE_EPOCH=1715201421
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
 CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
@@ -281,10 +281,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
 CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
@@ -407,10 +407,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/share/bash-completion/completions/gio
 /usr/share/bash-completion/completions/gresource
 /usr/share/bash-completion/completions/gsettings
-/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.8000.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.8000.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.8000.1-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.8000.1-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.8000.2-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.8000.2-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.8000.2-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.8000.2-gdb.py
 /usr/share/gettext/its/gschema.its
 /usr/share/gettext/its/gschema.loc
 /usr/share/gir-1.0/*.gir
@@ -787,39 +787,39 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgio-2.0.so.0.8000.1
-/V3/usr/lib64/libgirepository-2.0.so.0.8000.1
-/V3/usr/lib64/libglib-2.0.so.0.8000.1
-/V3/usr/lib64/libgmodule-2.0.so.0.8000.1
-/V3/usr/lib64/libgobject-2.0.so.0.8000.1
-/V3/usr/lib64/libgthread-2.0.so.0.8000.1
+/V3/usr/lib64/libgio-2.0.so.0.8000.2
+/V3/usr/lib64/libgirepository-2.0.so.0.8000.2
+/V3/usr/lib64/libglib-2.0.so.0.8000.2
+/V3/usr/lib64/libgmodule-2.0.so.0.8000.2
+/V3/usr/lib64/libgobject-2.0.so.0.8000.2
+/V3/usr/lib64/libgthread-2.0.so.0.8000.2
 /usr/lib64/libgio-2.0.so.0
-/usr/lib64/libgio-2.0.so.0.8000.1
+/usr/lib64/libgio-2.0.so.0.8000.2
 /usr/lib64/libgirepository-2.0.so.0
-/usr/lib64/libgirepository-2.0.so.0.8000.1
+/usr/lib64/libgirepository-2.0.so.0.8000.2
 /usr/lib64/libglib-2.0.so.0
-/usr/lib64/libglib-2.0.so.0.8000.1
+/usr/lib64/libglib-2.0.so.0.8000.2
 /usr/lib64/libgmodule-2.0.so.0
-/usr/lib64/libgmodule-2.0.so.0.8000.1
+/usr/lib64/libgmodule-2.0.so.0.8000.2
 /usr/lib64/libgobject-2.0.so.0
-/usr/lib64/libgobject-2.0.so.0.8000.1
+/usr/lib64/libgobject-2.0.so.0.8000.2
 /usr/lib64/libgthread-2.0.so.0
-/usr/lib64/libgthread-2.0.so.0.8000.1
+/usr/lib64/libgthread-2.0.so.0.8000.2
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libgio-2.0.so.0
-/usr/lib32/libgio-2.0.so.0.8000.1
+/usr/lib32/libgio-2.0.so.0.8000.2
 /usr/lib32/libgirepository-2.0.so.0
-/usr/lib32/libgirepository-2.0.so.0.8000.1
+/usr/lib32/libgirepository-2.0.so.0.8000.2
 /usr/lib32/libglib-2.0.so.0
-/usr/lib32/libglib-2.0.so.0.8000.1
+/usr/lib32/libglib-2.0.so.0.8000.2
 /usr/lib32/libgmodule-2.0.so.0
-/usr/lib32/libgmodule-2.0.so.0.8000.1
+/usr/lib32/libgmodule-2.0.so.0.8000.2
 /usr/lib32/libgobject-2.0.so.0
-/usr/lib32/libgobject-2.0.so.0.8000.1
+/usr/lib32/libgobject-2.0.so.0.8000.2
 /usr/lib32/libgthread-2.0.so.0
-/usr/lib32/libgthread-2.0.so.0.8000.1
+/usr/lib32/libgthread-2.0.so.0.8000.2
 
 %files libexec
 %defattr(-,root,root,-)
