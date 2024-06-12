@@ -7,7 +7,7 @@
 #
 Name     : glib
 Version  : 2.80.3
-Release  : 185
+Release  : 186
 URL      : https://download.gnome.org/sources/glib/2.80/glib-2.80.3.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.80/glib-2.80.3.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -225,7 +225,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1718227480
+export SOURCE_DATE_EPOCH=1718230207
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -328,6 +328,8 @@ install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/glib-schemas-firs
 install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/glib-schemas-trigger.service
 mkdir -p %{buildroot}/usr/lib/tmpfiles.d
 install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/glib.conf
+## Remove excluded files
+rm -f %{buildroot}*/usr/libexec/installed-tests/glib/x-content/win32-software/autorun.exe
 ## install_append content
 # enable the glib schema compile trigger
 mkdir -p %{buildroot}/usr/lib/systemd/system/update-triggers.target.wants
@@ -822,7 +824,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 %files libexec
 %defattr(-,root,root,-)
 /V3/usr/libexec/gio-launch-desktop
-/usr/libexec/
 /usr/libexec/gio-launch-desktop
 /usr/libexec/glib-compile-schemas
 
@@ -1681,6 +1682,130 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/libexec/installed-tests/glib/queue
 /usr/libexec/installed-tests/glib/rand
 /usr/libexec/installed-tests/glib/rcbox
+/usr/libexec/installed-tests/glib/readwrite
+/usr/libexec/installed-tests/glib/rec-mutex
+/usr/libexec/installed-tests/glib/refcount
+/usr/libexec/installed-tests/glib/refcount-macro
+/usr/libexec/installed-tests/glib/reference
+/usr/libexec/installed-tests/glib/references
+/usr/libexec/installed-tests/glib/refstring
+/usr/libexec/installed-tests/glib/regex
+/usr/libexec/installed-tests/glib/registered-type-info
+/usr/libexec/installed-tests/glib/relation
+/usr/libexec/installed-tests/glib/repository
+/usr/libexec/installed-tests/glib/repository-search-paths
+/usr/libexec/installed-tests/glib/resolver-parsing
+/usr/libexec/installed-tests/glib/resources
+/usr/libexec/installed-tests/glib/rwlock
+/usr/libexec/installed-tests/glib/sandbox
+/usr/libexec/installed-tests/glib/scannerapi
+/usr/libexec/installed-tests/glib/search-utils
+/usr/libexec/installed-tests/glib/sequence
+/usr/libexec/installed-tests/glib/services/org.freedesktop.portal.Documents.service
+/usr/libexec/installed-tests/glib/services/org.gtk.GDBus.FakeService.service
+/usr/libexec/installed-tests/glib/shell
+/usr/libexec/installed-tests/glib/signal-handler
+/usr/libexec/installed-tests/glib/signalgroup
+/usr/libexec/installed-tests/glib/signals
+/usr/libexec/installed-tests/glib/signals-refcount1
+/usr/libexec/installed-tests/glib/signals-refcount2
+/usr/libexec/installed-tests/glib/signals-refcount3
+/usr/libexec/installed-tests/glib/signals-refcount4
+/usr/libexec/installed-tests/glib/simple-async-result
+/usr/libexec/installed-tests/glib/simple-proxy
+/usr/libexec/installed-tests/glib/singleton
+/usr/libexec/installed-tests/glib/sleepy-stream
+/usr/libexec/installed-tests/glib/slice
+/usr/libexec/installed-tests/glib/slist
+/usr/libexec/installed-tests/glib/slow-connect-preload.so
+/usr/libexec/installed-tests/glib/socket
+/usr/libexec/installed-tests/glib/socket-address
+/usr/libexec/installed-tests/glib/socket-listener
+/usr/libexec/installed-tests/glib/socket-service
+/usr/libexec/installed-tests/glib/sort
+/usr/libexec/installed-tests/glib/spawn-multithreaded
+/usr/libexec/installed-tests/glib/spawn-path-search
+/usr/libexec/installed-tests/glib/spawn-path-search-helper
+/usr/libexec/installed-tests/glib/spawn-singlethread
+/usr/libexec/installed-tests/glib/spawn-test
+/usr/libexec/installed-tests/glib/spawn-test-helper
+/usr/libexec/installed-tests/glib/srvtarget
+/usr/libexec/installed-tests/glib/static-link.py
+/usr/libexec/installed-tests/glib/static-link/app.c
+/usr/libexec/installed-tests/glib/static-link/meson.build
+/usr/libexec/installed-tests/glib/stream-rw_all
+/usr/libexec/installed-tests/glib/strfuncs
+/usr/libexec/installed-tests/glib/string
+/usr/libexec/installed-tests/glib/struct-info
+/usr/libexec/installed-tests/glib/strvbuilder
+/usr/libexec/installed-tests/glib/taptestrunner.py
+/usr/libexec/installed-tests/glib/task
+/usr/libexec/installed-tests/glib/test-printf
+/usr/libexec/installed-tests/glib/test-spawn-echo
+/usr/libexec/installed-tests/glib/test.gresource
+/usr/libexec/installed-tests/glib/test1.overlay
+/usr/libexec/installed-tests/glib/test5.gresource
+/usr/libexec/installed-tests/glib/testfilemonitor
+/usr/libexec/installed-tests/glib/testing
+/usr/libexec/installed-tests/glib/testing-helper
+/usr/libexec/installed-tests/glib/thread
+/usr/libexec/installed-tests/glib/thread-deprecated
+/usr/libexec/installed-tests/glib/thread-pool
+/usr/libexec/installed-tests/glib/thread-pool-slow
+/usr/libexec/installed-tests/glib/threadtests
+/usr/libexec/installed-tests/glib/throws
+/usr/libexec/installed-tests/glib/thumbnail-verification
+/usr/libexec/installed-tests/glib/thumbnails/bad-header.png
+/usr/libexec/installed-tests/glib/thumbnails/empty-key.png
+/usr/libexec/installed-tests/glib/thumbnails/header-and-chunk-size.png
+/usr/libexec/installed-tests/glib/thumbnails/header-only.png
+/usr/libexec/installed-tests/glib/thumbnails/huge-chunk-size.png
+/usr/libexec/installed-tests/glib/thumbnails/mtime-zero.png
+/usr/libexec/installed-tests/glib/thumbnails/no-text-data.png
+/usr/libexec/installed-tests/glib/thumbnails/overlong-value.png
+/usr/libexec/installed-tests/glib/thumbnails/uri-mismatch.png
+/usr/libexec/installed-tests/glib/thumbnails/valid-no-size.png
+/usr/libexec/installed-tests/glib/thumbnails/valid.png
+/usr/libexec/installed-tests/glib/time-zones/Amsterdam-fat
+/usr/libexec/installed-tests/glib/time-zones/Amsterdam-slim
+/usr/libexec/installed-tests/glib/timeout
+/usr/libexec/installed-tests/glib/timer
+/usr/libexec/installed-tests/glib/tls-bindings
+/usr/libexec/installed-tests/glib/tls-certificate
+/usr/libexec/installed-tests/glib/tls-database
+/usr/libexec/installed-tests/glib/tls-interaction
+/usr/libexec/installed-tests/glib/trash
+/usr/libexec/installed-tests/glib/tree
+/usr/libexec/installed-tests/glib/type
+/usr/libexec/installed-tests/glib/type-flags
+/usr/libexec/installed-tests/glib/types
+/usr/libexec/installed-tests/glib/unicode
+/usr/libexec/installed-tests/glib/unicode-encoding
+/usr/libexec/installed-tests/glib/unicode-normalize
+/usr/libexec/installed-tests/glib/union-info
+/usr/libexec/installed-tests/glib/unix
+/usr/libexec/installed-tests/glib/unix-fd
+/usr/libexec/installed-tests/glib/unix-mounts
+/usr/libexec/installed-tests/glib/unix-streams
+/usr/libexec/installed-tests/glib/uri
+/usr/libexec/installed-tests/glib/utf8-misc
+/usr/libexec/installed-tests/glib/utf8-performance
+/usr/libexec/installed-tests/glib/utf8-pointer
+/usr/libexec/installed-tests/glib/utf8-validate
+/usr/libexec/installed-tests/glib/utf8.txt
+/usr/libexec/installed-tests/glib/utils
+/usr/libexec/installed-tests/glib/utils-c-11
+/usr/libexec/installed-tests/glib/utils-c-17
+/usr/libexec/installed-tests/glib/utils-c-90
+/usr/libexec/installed-tests/glib/utils-c-99
+/usr/libexec/installed-tests/glib/utils-isolated
+/usr/libexec/installed-tests/glib/value
+/usr/libexec/installed-tests/glib/vfs
+/usr/libexec/installed-tests/glib/volumemonitor
+/usr/libexec/installed-tests/glib/win32-appinfo
+/usr/libexec/installed-tests/glib/x-content/image-dcf/DCIM/Camera/20130831_203925.jpg
+/usr/libexec/installed-tests/glib/x-content/image-dcf/DCIM/Camera/20130831_203928.jpg
+/usr/libexec/installed-tests/glib/x-content/unix-software/autorun.sh
 /usr/share/installed-tests/glib/1bit-mutex.test
 /usr/share/installed-tests/glib/642026-ec.test
 /usr/share/installed-tests/glib/642026.test
