@@ -1,0 +1,76 @@
+From ae1fb9eb49c8730cd270095a85ad5b164ee788bc Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Thu, 15 Aug 2024 14:24:49 -0700
+Subject: [PATCH] Add stateless path for mimeinfo.cache
+
+We previously modified update-desktop-database and mime-update.service to
+generate mimeinfo.cache for /usr/share/applications under
+/var/cache/applications. When gio attempts to read it as part of
+scanning /usr/share/applications, redirect it to
+/var/cache/applications instead.
+
+Complicated explanation:
+gio expects a mimeinfo.cache file in the same directory as the .desktop
+files it indexes. It will scan each candidate directory's mimeinfo.cache
+to find a match, but not the .desktop files themselves. After selecting
+a .desktop file (whether it exists in that directory or not), it will
+check other directories, by priority, to see if an equivalent .desktop
+file exists there too. If so, it will *not* use the .desktop file in the
+same directory as the matching mimeinfo.cache. At the same time, if no
+mimeinfo.cache file exists in a given directory, it will never consider
+the .desktop files in that directory as possible matches.
+
+Example:
+- /usr/share/applications/org.gnome.OnlineAccounts.Oauth2.desktop exists
+- /var/cache/applications/org.gnome.OnlineAccounts.Oauth2.desktop *does not* exist
+- /var/cache/applications/mimeinfo.cache maps a MIME type to org.gnome.OnlineAccounts.Oauth2.desktop.
+- /usr/share/applications/mimeinfo.cache *does not* exist
+- gio will not find a match in /usr/share/applications/mimeinfo.cache, since it does not exist
+- gio will determine that /var/cache/applications/org.gnome.OnlineAccounts.Oauth2.desktop
+  is a possible match, but it will also determine that
+  /usr/share/applications/org.gnome.OnlineAccounts.Oauth2.desktop has
+  higher priority, so will mask the /var/cache/applications match.
+- gio will have no match to offer.
+
+Fix:
+When gio tries to read mimeinfo.cache in /usr/share/applications, make
+it open /var/cache/applications/mimeinfo.cache instead. This will
+provide gio with the correct mapping for the .desktop files in
+/usr/share/applications.
+
+Caveat:
+gio will read /var/cache/application/mimeinfo.cache again while
+attempting to scan /var/cache/applications, but since no .desktop files
+will exist there, this shouldn't cause a problem.
+
+Long-term: glib/GNOME should be taught to use lookaside paths for cached
+data.
+---
+ gio/gdesktopappinfo.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
+index 87db7a97a1eb..0ebfaf07aa8a 100644
+--- a/gio/gdesktopappinfo.c
++++ b/gio/gdesktopappinfo.c
+@@ -1023,7 +1023,16 @@ desktop_file_dir_unindexed_read_mimeapps_lists (DesktopFileDir *dir)
+   /* Finally, the mimeinfo.cache, which is just a cached copy of what we
+    * would find in the MimeTypes= lines of all of the desktop files.
+    */
+-  filename = g_strdup_printf ("%s/mimeinfo.cache", dir->path);
++  if (0 == strcmp("/usr/share/applications", dir->path)) {
++    // For Clear Linux, we keep mimeinfo.cache for /usr/share/applications in
++    // /var/cache/applications/mimeinfo.cache. Corresponding patch in
++    // desktop-file-utils adds an option to /usr/bin/update-desktop-database to
++    // output the cache file in /var/cache/applications.
++    filename = g_strdup_printf ("/var/cache/applications/mimeinfo.cache");
++  }
++  else {
++    filename = g_strdup_printf ("%s/mimeinfo.cache", dir->path);
++  }
+   desktop_file_dir_unindexed_read_mimeapps_list (dir, filename, MIME_CACHE_GROUP, TRUE);
+   g_free (filename);
+ }
+-- 
+2.46.0
+
