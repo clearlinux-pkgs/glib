@@ -7,7 +7,7 @@
 #
 Name     : glib
 Version  : 2.82.0
-Release  : 189
+Release  : 190
 URL      : https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz
 Source1  : glib-schemas-firstboot.service
@@ -227,7 +227,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1724690625
+export SOURCE_DATE_EPOCH=1724696748
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -374,7 +374,6 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /V3/usr/bin/gtester
 /usr/bin/gapplication
 /usr/bin/gdbus
-/usr/bin/gdbus-codegen
 /usr/bin/gi-compile-repository
 /usr/bin/gi-decompile-typelib
 /usr/bin/gi-inspect-typelib
@@ -382,14 +381,11 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/bin/gio-querymodules
 /usr/bin/glib-compile-resources
 /usr/bin/glib-compile-schemas
-/usr/bin/glib-genmarshal
 /usr/bin/glib-gettextize
-/usr/bin/glib-mkenums
 /usr/bin/gobject-query
 /usr/bin/gresource
 /usr/bin/gsettings
 /usr/bin/gtester
-/usr/bin/gtester-report
 
 %files config
 %defattr(-,root,root,-)
@@ -435,6 +431,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files dev
 %defattr(-,root,root,-)
+/usr/bin/gdbus-codegen
+/usr/bin/glib-genmarshal
+/usr/bin/glib-mkenums
+/usr/bin/gtester-report
 /usr/include/gio-unix-2.0/gio/gdesktopappinfo.h
 /usr/include/gio-unix-2.0/gio/gfiledescriptorbased.h
 /usr/include/gio-unix-2.0/gio/gunixfdmessage.h

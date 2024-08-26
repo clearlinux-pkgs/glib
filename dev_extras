@@ -1,0 +1,5 @@
+/usr/bin/gdbus-codegen
+/usr/bin/glib-genmarshal
+/usr/bin/glib-mkenums
+/usr/bin/gtester-report
+/usr/bin/gtester
