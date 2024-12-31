@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : glib
-Version  : 2.82.3
-Release  : 193
-URL      : https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz
-Source0  : https://download.gnome.org/sources/glib/2.82/glib-2.82.3.tar.xz
+Version  : 2.82.4
+Release  : 194
+URL      : https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz
+Source0  : https://download.gnome.org/sources/glib/2.82/glib-2.82.4.tar.xz
 Source1  : glib-schemas-firstboot.service
 Source2  : glib-schemas-trigger.service
 Source3  : glib.tmpfiles
@@ -205,8 +205,8 @@ tests components for the glib package.
 
 
 %prep
-%setup -q -n glib-2.82.3
-cd %{_builddir}/glib-2.82.3
+%setup -q -n glib-2.82.4
+cd %{_builddir}/glib-2.82.4
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
@@ -216,10 +216,10 @@ cd %{_builddir}/glib-2.82.3
 %patch -P 7 -p1
 %patch -P 8 -p1
 pushd ..
-cp -a glib-2.82.3 build32
+cp -a glib-2.82.4 build32
 popd
 pushd ..
-cp -a glib-2.82.3 buildavx2
+cp -a glib-2.82.4 buildavx2
 popd
 
 %build
@@ -227,7 +227,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1733840196
+export SOURCE_DATE_EPOCH=1735604182
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -403,10 +403,10 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 /usr/share/bash-completion/completions/gio
 /usr/share/bash-completion/completions/gresource
 /usr/share/bash-completion/completions/gsettings
-/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.8200.3-gdb.py
-/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.8200.3-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.8200.3-gdb.py
-/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.8200.3-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libglib-2.0.so.0.8200.4-gdb.py
+/usr/share/gdb/auto-load/usr/lib32/libgobject-2.0.so.0.8200.4-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libglib-2.0.so.0.8200.4-gdb.py
+/usr/share/gdb/auto-load/usr/lib64/libgobject-2.0.so.0.8200.4-gdb.py
 /usr/share/gettext/its/gschema.its
 /usr/share/gettext/its/gschema.loc
 /usr/share/gir-1.0/*.gir
@@ -789,39 +789,39 @@ install -m 00644 multilib-glibconfig.h %{buildroot}/usr/include/glib-2.0/glibcon
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgio-2.0.so.0.8200.3
-/V3/usr/lib64/libgirepository-2.0.so.0.8200.3
-/V3/usr/lib64/libglib-2.0.so.0.8200.3
-/V3/usr/lib64/libgmodule-2.0.so.0.8200.3
-/V3/usr/lib64/libgobject-2.0.so.0.8200.3
-/V3/usr/lib64/libgthread-2.0.so.0.8200.3
+/V3/usr/lib64/libgio-2.0.so.0.8200.4
+/V3/usr/lib64/libgirepository-2.0.so.0.8200.4
+/V3/usr/lib64/libglib-2.0.so.0.8200.4
+/V3/usr/lib64/libgmodule-2.0.so.0.8200.4
+/V3/usr/lib64/libgobject-2.0.so.0.8200.4
+/V3/usr/lib64/libgthread-2.0.so.0.8200.4
 /usr/lib64/libgio-2.0.so.0
-/usr/lib64/libgio-2.0.so.0.8200.3
+/usr/lib64/libgio-2.0.so.0.8200.4
 /usr/lib64/libgirepository-2.0.so.0
-/usr/lib64/libgirepository-2.0.so.0.8200.3
+/usr/lib64/libgirepository-2.0.so.0.8200.4
 /usr/lib64/libglib-2.0.so.0
-/usr/lib64/libglib-2.0.so.0.8200.3
+/usr/lib64/libglib-2.0.so.0.8200.4
 /usr/lib64/libgmodule-2.0.so.0
-/usr/lib64/libgmodule-2.0.so.0.8200.3
+/usr/lib64/libgmodule-2.0.so.0.8200.4
 /usr/lib64/libgobject-2.0.so.0
-/usr/lib64/libgobject-2.0.so.0.8200.3
+/usr/lib64/libgobject-2.0.so.0.8200.4
 /usr/lib64/libgthread-2.0.so.0
-/usr/lib64/libgthread-2.0.so.0.8200.3
+/usr/lib64/libgthread-2.0.so.0.8200.4
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libgio-2.0.so.0
-/usr/lib32/libgio-2.0.so.0.8200.3
+/usr/lib32/libgio-2.0.so.0.8200.4
 /usr/lib32/libgirepository-2.0.so.0
-/usr/lib32/libgirepository-2.0.so.0.8200.3
+/usr/lib32/libgirepository-2.0.so.0.8200.4
 /usr/lib32/libglib-2.0.so.0
-/usr/lib32/libglib-2.0.so.0.8200.3
+/usr/lib32/libglib-2.0.so.0.8200.4
 /usr/lib32/libgmodule-2.0.so.0
-/usr/lib32/libgmodule-2.0.so.0.8200.3
+/usr/lib32/libgmodule-2.0.so.0.8200.4
 /usr/lib32/libgobject-2.0.so.0
-/usr/lib32/libgobject-2.0.so.0.8200.3
+/usr/lib32/libgobject-2.0.so.0.8200.4
 /usr/lib32/libgthread-2.0.so.0
-/usr/lib32/libgthread-2.0.so.0.8200.3
+/usr/lib32/libgthread-2.0.so.0.8200.4
 
 %files libexec
 %defattr(-,root,root,-)
