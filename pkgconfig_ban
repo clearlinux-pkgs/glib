@@ -6,3 +6,5 @@ libselinux
 32bash-completion
 32sysprof-capture-4
 sysprof-capture-4
+32libinotify
+libinotify
