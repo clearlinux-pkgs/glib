@@ -7,7 +7,7 @@
 #
 Name     : glib
 Version  : 2.84.1
-Release  : 199
+Release  : 200
 URL      : https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz
 Source0  : https://download.gnome.org/sources/glib/2.84/glib-2.84.1.tar.xz
 Source1  : glib-schemas-firstboot.service
